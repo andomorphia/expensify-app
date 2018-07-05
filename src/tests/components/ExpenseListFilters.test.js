@@ -20,6 +20,7 @@ beforeEach(() => {
   sortByAmount = jest.fn();
   setStartDate = jest.fn();
   setEndDate = jest.fn();
+  /* eslint-disable function-paren-newline */
   wrapper = shallow(
     <ExpenseListFilters
       filters={filters}
@@ -28,8 +29,9 @@ beforeEach(() => {
       sortByAmount={sortByAmount}
       setStartDate={setStartDate}
       setEndDate={setEndDate}
-    />
+    />,
   );
+  /* eslint-enable */
 });
 
 describe('ExpenseListFilters component rendering: ', () => {

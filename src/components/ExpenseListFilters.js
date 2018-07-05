@@ -7,12 +7,21 @@ import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } fro
 
 export class ExpenseListFilters extends Component {
   static propTypes = {
-    setStartDate: PropTypes.func.isRequired,
-    setEndDate: PropTypes.func.isRequired,
-    setTextFilter: PropTypes.func.isRequired,
-    sortByDate: PropTypes.func.isRequired,
-    sortByAmount: PropTypes.func.isRequired,
-    filters: PropTypes.object.isRequired,
+    setStartDate: PropTypes.func,
+    setEndDate: PropTypes.func,
+    setTextFilter: PropTypes.func,
+    sortByDate: PropTypes.func,
+    sortByAmount: PropTypes.func,
+    filters: PropTypes.object,
+  }
+
+  static defaultProps = {
+    setStartDate: undefined,
+    setEndDate: undefined,
+    setTextFilter: undefined,
+    sortByDate: undefined,
+    sortByAmount: undefined,
+    filters: {},
   }
 
   state = {
