@@ -8,7 +8,7 @@ import {
   sortByDate,
 } from '../../actions/filters';
 
-describe('setStartDate', () => {
+describe('setStartDate: ', () => {
   test('should generate setStartDate action object', () => {
     const action = setStartDate(moment(0));
 
@@ -19,7 +19,7 @@ describe('setStartDate', () => {
   });
 });
 
-describe('setEndDate', () => {
+describe('setEndDate: ', () => {
   test('should generate setEndDate action object', () => {
     const action = setEndDate(moment(0));
 
@@ -30,7 +30,7 @@ describe('setEndDate', () => {
   });
 });
 
-describe('setTextFilter (provided value)', () => {
+describe('setTextFilter (provided value): ', () => {
   test('should generate setTextFilter action object with provided value', () => {
     const text = 'Some text';
     const action = setTextFilter(text);
@@ -42,7 +42,7 @@ describe('setTextFilter (provided value)', () => {
   });
 });
 
-describe('setTextFilter (default value)', () => {
+describe('setTextFilter (default value): ', () => {
   test('should generate setTextFilter action object with default value', () => {
     const action = setTextFilter();
 
@@ -53,13 +53,13 @@ describe('setTextFilter (default value)', () => {
   });
 });
 
-describe('sortByAmount', () => {
+describe('sortByAmount: ', () => {
   test('should generate sortByAmount action object', () => {
     expect(sortByAmount()).toEqual({ type: 'SORT_BY_AMOUNT' });
   });
 });
 
-describe('sortByDate', () => {
+describe('sortByDate: ', () => {
   test('should generate sortByDate action object', () => {
     expect(sortByDate()).toEqual({ type: 'SORT_BY_DATE' });
   });
