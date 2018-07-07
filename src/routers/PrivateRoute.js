@@ -27,11 +27,11 @@ export const PrivateRoute = ({
 
 PrivateRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  Component: PropTypes.node,
+  component: PropTypes.any,
 };
 
 PrivateRoute.defaultProps = {
-  Component: undefined,
+  component: undefined,
 };
 
 const mapStateToProps = state => ({
