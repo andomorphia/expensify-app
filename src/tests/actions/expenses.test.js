@@ -6,6 +6,7 @@ import {
   addExpense,
   editExpense,
   removeExpense,
+  startRemoveExpense,
   setExpenses,
   startSetExpenses,
 } from '../../actions/expenses';
@@ -133,6 +134,31 @@ describe('removeExpense: ', () => {
       type: 'REMOVE_EXPENSE',
       id: '123abc',
     });
+  });
+});
+
+describe('startRemoveExpense: ', () => {
+  test('should remove expense from firebase', (done) => {
+    const store = createMockStore({});
+    const { id } = expenses[2];
+
+    store.dispatch(startRemoveExpense({ id }))
+      .then(() => {
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+          type: 'REMOVE_EXPENSE',
+          id,
+        });
+
+        return database.ref(`expenses/${id}`).once('value');
+      })
+      // Chaining promises
+      .then((snapshot) => {
+        expect(snapshot.val()).toBeFalsy();
+        // Tells Jest this is an asynchronous test
+        done();
+      });
   });
 });
 
