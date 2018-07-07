@@ -5,6 +5,7 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
+  startEditExpense,
   removeExpense,
   startRemoveExpense,
   setExpenses,
@@ -123,6 +124,35 @@ describe('editExpense: ', () => {
         note: 'New note value',
       },
     });
+  });
+});
+
+describe('startEditExpense: ', () => {
+  test('should edit expense from firebase', (done) => {
+    const store = createMockStore({});
+    const { id } = expenses[0];
+    const updates = {
+      amount: 21045,
+    };
+
+    store.dispatch(startEditExpense(id, updates))
+      .then(() => {
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+          type: 'EDIT_EXPENSE',
+          id,
+          updates,
+        });
+
+        return database.ref(`expenses/${id}`).once('value');
+      })
+      // Chaining promises
+      .then((snapshot) => {
+        expect(snapshot.val().amount).toEqual(updates.amount);
+        // Tells Jest this is an asynchronous test
+        done();
+      });
   });
 });
 
