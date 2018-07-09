@@ -6,7 +6,9 @@ export const addExpense = expense => ({
   expense,
 });
 
-export const startAddExpense = (expenseData = {}) => (dispatch) => {
+export const startAddExpense = (expenseData = {}) => (dispatch, getState) => {
+  const { uid } = getState().auth;
+
   const {
     description = '',
     note = '',
@@ -21,7 +23,7 @@ export const startAddExpense = (expenseData = {}) => (dispatch) => {
     createdAt,
   };
 
-  return database.ref('expenses')
+  return database.ref(`users/${uid}/expenses`)
     .push(expense)
     .then((ref) => {
       dispatch(addExpense({
@@ -37,12 +39,15 @@ export const removeExpense = ({ id } = {}) => ({
   id,
 });
 
-export const startRemoveExpense = ({ id } = {}) => dispatch =>
-  database.ref(`expenses/${id}`)
+export const startRemoveExpense = ({ id } = {}) => (dispatch, getState) => {
+  const { uid } = getState().auth;
+
+  return database.ref(`users/${uid}/expenses/${id}`)
     .remove()
     .then(() => {
       dispatch(removeExpense({ id }));
     });
+};
 
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
@@ -51,12 +56,15 @@ export const editExpense = (id, updates) => ({
   updates,
 });
 
-export const startEditExpense = (id, updates) => dispatch =>
-  database.ref(`expenses/${id}`)
+export const startEditExpense = (id, updates) => (dispatch, getState) => {
+  const { uid } = getState().auth;
+
+  return database.ref(`users/${uid}/expenses/${id}`)
     .update(updates)
     .then(() => {
       dispatch(editExpense(id, updates));
     });
+};
 
 // SET_EXPENSES
 export const setExpenses = expenses => ({
@@ -64,8 +72,10 @@ export const setExpenses = expenses => ({
   expenses,
 });
 
-export const startSetExpenses = () => dispatch =>
-  database.ref('expenses')
+export const startSetExpenses = () => (dispatch, getState) => {
+  const { uid } = getState().auth;
+
+  return database.ref(`users/${uid}/expenses`)
     .once('value')
     .then((snapshot) => {
       // Create array from snapshot
@@ -82,3 +92,4 @@ export const startSetExpenses = () => dispatch =>
       // Dispatch it
       dispatch(setExpenses(expenses));
     });
+};
