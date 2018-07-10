@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -18,12 +18,18 @@ export class AddExpensePage extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Add Expense</h1>
-        <ExpenseForm
-          onSubmit={this.onSubmit}
-        />
-      </div>
+      <Fragment>
+        <div className="page-header">
+          <div className="content-container">
+            <h1 className="page-header__title">Add Expense</h1>
+          </div>
+        </div>
+        <div className="content-container">
+          <ExpenseForm
+            onSubmit={this.onSubmit}
+          />
+        </div>
+      </Fragment>
     );
   }
 }

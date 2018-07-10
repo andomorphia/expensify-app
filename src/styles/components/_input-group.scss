@@ -1,0 +1,37 @@
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: $m-size;
+
+  @media (min-width: $desktop-breakpoint) {
+    margin-bottom: $l-size;
+  }
+}
+
+.input-group__item {
+  margin-right: $s-size;
+}
+
+.input-group--stacked-items {
+  @extend .input-group;
+  flex-direction: column;
+
+  @media (min-width: $desktop-breakpoint) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.input-group--stacked-items .input-group__item {
+  margin: 0 0 $s-size 0;
+  width: 100%;
+
+  @media (min-width: $desktop-breakpoint) {
+    margin: 0 $s-size 0 0;
+    width: auto;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
